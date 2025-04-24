@@ -23,7 +23,7 @@ if project_ids is None:
         os.mkdir(f'./{prjt_name}')
 
     for wf in data['data']:
-        with open(f'./{prjt_name}/{wf['name']}.json', 'w') as f:
+        with open(f'./{prjt_name}/{wf['name'].replace(' ', '_')}.json', 'w') as f:
             json.dump(wf, f, indent=4)
 
 else:
@@ -39,7 +39,7 @@ else:
             os.mkdir(f'./{prjt_name}')
 
         for wf in data['data']:
-            with open(f'./{prjt_name}/{wf['name']}.json', 'w') as f:
+            with open(f'./{prjt_name}/{wf['name'].replace(' ', '_')}.json', 'w') as f:
                 json.dump(wf, f, indent=4)
 
 
