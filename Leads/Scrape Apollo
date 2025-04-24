@@ -1,0 +1,420 @@
+{
+    "createdAt": "2025-04-18T23:13:24.630Z",
+    "updatedAt": "2025-04-24T08:01:48.000Z",
+    "id": "VFCR6BxExceGOWXK",
+    "name": "Scrape Apollo",
+    "active": false,
+    "nodes": [
+        {
+            "parameters": {
+                "inputSource": "jsonExample",
+                "jsonExample": "{\n  \"search\": \"landscaping\",\n  \"location\": \"New York\",\n  \"state\": \"NY\",\n  \"country\": \"us\",\n  \"limit\": 500\n}"
+            },
+            "id": "91a01f79-65f2-4d41-8bf5-e34f364cc149",
+            "typeVersion": 1.1,
+            "name": "When Executed by Another Workflow",
+            "type": "n8n-nodes-base.executeWorkflowTrigger",
+            "position": [
+                -80,
+                360
+            ]
+        },
+        {
+            "parameters": {
+                "url": "=https://api.apify.com/v2/datasets/{{ $json.data.defaultDatasetId }}/items",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                600,
+                360
+            ],
+            "id": "0a59cd4a-db72-42ad-a0e4-e27fd86636c5",
+            "name": "HTTP Request2",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://api.apify.com/v2/acts/jljBwyyQakqrL1wae/runs?waitForFinish=300",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n    \"getPersonalEmails\": true,\n    \"getWorkEmails\": true,\n    \"totalRecords\": {{ $json.limit }},\n    \"url\": \"https://app.apollo.io/#/people?sortAscending=false&sortByField=recommendations_score&contactEmailStatusV2[]=verified&page=1&qKeywords={{ $json.search }}&personLocations[]={{ $json.location }}&personLocations[]={{ $json.state }}&personLocations[]={{ $json.country }}\"\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                400,
+                360
+            ],
+            "id": "c3753bb3-580a-4c18-944f-a05e102b3f95",
+            "name": "HTTP Request",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "appendOrUpdate",
+                "documentId": {
+                    "__rl": true,
+                    "value": "1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY",
+                    "mode": "list",
+                    "cachedResultName": "Scraped Data",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit?usp=drivesdk"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": 627675558,
+                    "mode": "list",
+                    "cachedResultName": "Apollo",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit#gid=627675558"
+                },
+                "columns": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "id": "={{ $json.id }}",
+                        "name": "={{ $json.name }}",
+                        "linkedinURL": "={{ $json.linkedin_url }}",
+                        "title": "={{ $json.title }}",
+                        "headline": "={{ $json.headline }}",
+                        "email": "={{ $json.email }}",
+                        "personalEmails": "={{ $json.personal_emails }}",
+                        "twitterURL": "={{ $json.twitter_url }}",
+                        "githubURL": "={{ $json.github_url }}",
+                        "facebookURL": "={{ $json.facebook_url }}",
+                        "organizationID": "={{ $json.organization.id }}",
+                        "organizationLinkedin": "={{ $json.organization.linkedin_url }}",
+                        "organizationURL": "={{ $json.organization.website_url }}",
+                        "organizationEstimatedNumberEmployees": "={{ $json.organization.estimated_num_employees }}",
+                        "organizationRawAddress": "={{ $json.organization.raw_address }}",
+                        "organizationFacebookURL": "={{ $json.organization.facebook_url }}"
+                    },
+                    "matchingColumns": [
+                        "id"
+                    ],
+                    "schema": [
+                        {
+                            "id": "id",
+                            "displayName": "id",
+                            "required": false,
+                            "defaultMatch": true,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "name",
+                            "displayName": "name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "linkedinURL",
+                            "displayName": "linkedinURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "title",
+                            "displayName": "title",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "headline",
+                            "displayName": "headline",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "email",
+                            "displayName": "email",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "personalEmails",
+                            "displayName": "personalEmails",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "twitterURL",
+                            "displayName": "twitterURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "facebookURL",
+                            "displayName": "facebookURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "githubURL",
+                            "displayName": "githubURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationID",
+                            "displayName": "organizationID",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationLinkedin",
+                            "displayName": "organizationLinkedin",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationURL",
+                            "displayName": "organizationURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationEstimatedNumberEmployees",
+                            "displayName": "organizationEstimatedNumberEmployees",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationRawAddress",
+                            "displayName": "organizationRawAddress",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "organizationFacebookURL",
+                            "displayName": "organizationFacebookURL",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.5,
+            "position": [
+                820,
+                360
+            ],
+            "id": "b75ea645-9251-42ad-8704-333a29e28636",
+            "name": "Google Sheets",
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "id": "seMEDuFYQQi6AWSe",
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "mode": "runOnceForEachItem",
+                "language": "python",
+                "pythonCode": "# Add a new field called 'myNewField' to the JSON of the item\n_input.item.json.search = str(_input.item.json.search).strip().replace(' ', '%20')\n_input.item.json.location = str(_input.item.json.location).strip().replace(' ', '%20')\n_input.item.json.state = str(_input.item.json.state).strip().replace(' ', '%20')\n_input.item.json.country = str(_input.item.json.country).strip().replace(' ', '%20')\nif _input.item.json.limit < 500:\n  _input.item.json.limit = 500\nreturn _input.item"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                140,
+                360
+            ],
+            "id": "fcbaf95b-4c08-4ce4-b569-c97694418a75",
+            "name": "Code"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1040,
+                360
+            ],
+            "id": "b1f45c0a-b526-46d2-ad4c-e27d2bd278be",
+            "name": "Aggregate1"
+        }
+    ],
+    "connections": {
+        "When Executed by Another Workflow": {
+            "main": [
+                [
+                    {
+                        "node": "Code",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request2": {
+            "main": [
+                [
+                    {
+                        "node": "Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Sheets": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": {
+        "templateCredsSetupCompleted": true
+    },
+    "pinData": {
+        "When Executed by Another Workflow": [
+            {
+                "json": {
+                    "search": "landscaping",
+                    "location": "New York",
+                    "state": "NY",
+                    "country": "us",
+                    "limit": 500
+                }
+            }
+        ]
+    },
+    "versionId": "53c59d6f-7d6f-4b34-81f5-b477991a6457",
+    "triggerCount": 0,
+    "tags": []
+}

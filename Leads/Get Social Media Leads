@@ -1,0 +1,422 @@
+{
+    "createdAt": "2025-04-22T05:17:09.887Z",
+    "updatedAt": "2025-04-24T01:19:08.000Z",
+    "id": "rEGLe3N5BHMWRs90",
+    "name": "Get Social Media Leads",
+    "active": false,
+    "nodes": [
+        {
+            "parameters": {
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+            "typeVersion": 1.1,
+            "position": [
+                -280,
+                -200
+            ],
+            "id": "3561b07f-98f8-46aa-8e0b-0f314a098990",
+            "name": "When chat message received",
+            "webhookId": "c8dc5880-0150-4672-84f5-43c24af1a519"
+        },
+        {
+            "parameters": {
+                "options": {
+                    "systemMessage": "=# Overview\nYou are the personal assistant that excels at web scraping. Your job is to\nsend the user's query to the correct tool.\n\n## Tools\n- instagram_web_scraper: Use this tool to web scrape Instagram. You'll want to aggregate all the results together and send a list back to the user.\n\n- tiktok_web_scraper: Use this tool to web scrape TikTok. You'll want to aggregate all the results together and send a list back to the user.\n\n- x_web_scraper: Use this tool to web scrape X or Twitter. You'll want to aggregate all the results together and send a list back to the user.\n\nIf the user asks you to scrape multiple sources, please combine them all in\none output. If the user doesn't specify a specific source, then scrape them all. Please include details in your response such as Emails, Phone Numbers, Linkedin links, website urls, company description, and any other contact information.\n\nFor each of the items you list, specify which scraper you retrieved the information from\n\n## Workflow inputs\n- search: plase insert the industry. For example: Landscaping, or Grocery Store\n- location: please insert the city. For example: Toronto, or Los Angeles\n- state: please insert the state/province code uppercase. For example: NY,\nCA\n- country: please insert the country code, lower case. For example: ca, or\nus"
+                }
+            },
+            "type": "@n8n/n8n-nodes-langchain.agent",
+            "typeVersion": 1.8,
+            "position": [
+                -60,
+                -200
+            ],
+            "id": "d56901ab-350e-43dd-be82-6e18c922c69f",
+            "name": "AI Agent"
+        },
+        {
+            "parameters": {},
+            "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+            "typeVersion": 1.3,
+            "position": [
+                -20,
+                120
+            ],
+            "id": "f54a48e9-4036-44ce-8d3c-09588a644eb1",
+            "name": "Simple Memory"
+        },
+        {
+            "parameters": {
+                "name": "instagram_web_scraper",
+                "description": "Call this tool when the user wants to scrape Instagram.",
+                "workflowId": {
+                    "__rl": true,
+                    "value": "uShniQJGXWveHg2l",
+                    "mode": "list",
+                    "cachedResultName": "Leads \u2014 Scrape Instagram"
+                },
+                "workflowInputs": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "search": "={{ $fromAI(\"industry\", \"This is the industry that we are going to be using to webscrape from Instagram\") }}",
+                        "limit": "={{ $fromAI(\"limit\", \"This is the max results to return from the scrape. If there isn't a limit specified, set it to 200\") }}",
+                        "country": "={{ $fromAI(\"country\", \"This is the country that we are going to be using to webscrape from Instagram. Make sure the country is spelt out and not abreviated. Example: United States of America\") }}",
+                        "state": "={{ $fromAI(\"state\", \"This is the state that we are going to be using to webscrape from Instagram. Make sure the state is spelt out and not abreviated\") }}",
+                        "location": "={{ $fromAI(\"city\", \"This is the city that we are going to be using to webscrape from Instagram. Make sure the city is spelt out and not abreviated\") }}",
+                        "countryCode": "={{ $fromAI(\"country\", \"This is the country ISO Alpha code that we are going to be using to webscrape from Instagram. Make sure the country code is of ISO Alpha format. Example: us\") }}"
+                    },
+                    "matchingColumns": [],
+                    "schema": [
+                        {
+                            "id": "search",
+                            "displayName": "search",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "location",
+                            "displayName": "location",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "state",
+                            "displayName": "state",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "country",
+                            "displayName": "country",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "limit",
+                            "displayName": "limit",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "number"
+                        },
+                        {
+                            "id": "countryCode",
+                            "displayName": "countryCode",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string",
+                            "removed": false
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                }
+            },
+            "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+            "typeVersion": 2.1,
+            "position": [
+                160,
+                120
+            ],
+            "id": "6dcaf334-6c76-42df-91b7-4c92a85aabc7",
+            "name": "Instagram"
+        },
+        {
+            "parameters": {
+                "model": "grok-2-1212",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+            "typeVersion": 1,
+            "position": [
+                -240,
+                120
+            ],
+            "id": "f52844c7-8637-4a40-8bed-fb4f2386f352",
+            "name": "xAI Grok Chat Model",
+            "credentials": {
+                "xAiApi": {
+                    "id": "I5LW0rhixggU6PDg",
+                    "name": "xAi account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "model": {
+                    "__rl": true,
+                    "value": "o3-mini",
+                    "mode": "list",
+                    "cachedResultName": "o3-mini"
+                },
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+            "typeVersion": 1.2,
+            "position": [
+                -540,
+                120
+            ],
+            "id": "e2dfc740-8ade-4364-b1cc-152b0a61df83",
+            "name": "OpenAI Chat Model",
+            "credentials": {
+                "openAiApi": {
+                    "id": "VQkxJojR7CzPADuj",
+                    "name": "OpenAi account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "name": "tiktok_web_scraper",
+                "description": "Call this tool when the user wants to scrape TikTok.",
+                "workflowId": {
+                    "__rl": true,
+                    "value": "6uN6LDKJHPGLQo3m",
+                    "mode": "list",
+                    "cachedResultName": "Leads \u2014 Scrape TikTok"
+                },
+                "workflowInputs": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "search": "={{ $fromAI(\"industry\", \"This is the industry that we are going to be using to webscrape from TikTok\") }}",
+                        "limit": "={{ $fromAI(\"limit\", \"This is the max results to return from the scrape. If there isn't a limit specified, set it to 200\") }}",
+                        "country": "={{ $fromAI(\"country\", \"This is the country that we are going to be using to webscrape from TikTok. Make sure the country is spelt out and not abreviated. Example: United States of America\") }}",
+                        "state": "={{ $fromAI(\"state\", \"This is the state that we are going to be using to webscrape from TikTok. Make sure the state is spelt out and not abreviated\") }}",
+                        "location": "={{ $fromAI(\"city\", \"This is the city that we are going to be using to webscrape from TikTok. Make sure the city is spelt out and not abreviated\") }}"
+                    },
+                    "matchingColumns": [],
+                    "schema": [
+                        {
+                            "id": "search",
+                            "displayName": "search",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "location",
+                            "displayName": "location",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "state",
+                            "displayName": "state",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "country",
+                            "displayName": "country",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "limit",
+                            "displayName": "limit",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "number"
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                }
+            },
+            "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+            "typeVersion": 2.1,
+            "position": [
+                280,
+                120
+            ],
+            "id": "5a63d502-cf10-4a1e-ac06-be762962f3f7",
+            "name": "TikTok"
+        },
+        {
+            "parameters": {
+                "name": "x_web_scraper",
+                "description": "Call this tool when the user wants to scrape X.",
+                "workflowId": {
+                    "__rl": true,
+                    "value": "CO2NfObzKydyv1Lo",
+                    "mode": "list",
+                    "cachedResultName": "Leads \u2014 Scrape Twitter"
+                },
+                "workflowInputs": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "search": "={{ $fromAI(\"industry\", \"This is the industry that we are going to be using to webscrape from X\") }}",
+                        "limit": "={{ $fromAI(\"limit\", \"This is the max results to return from the scrape. If there isn't a limit specified, set it to 200\") }}",
+                        "country": "={{ $fromAI(\"country\", \"This is the country that we are going to be using to webscrape from X. Make sure the country is spelt out and not abreviated. Example: United States of America\") }}",
+                        "state": "={{ $fromAI(\"state\", \"This is the state that we are going to be using to webscrape from X. Make sure the state is spelt out and not abreviated\") }}",
+                        "location": "={{ $fromAI(\"city\", \"This is the city that we are going to be using to webscrape from X. Make sure the city is spelt out and not abreviated\") }}"
+                    },
+                    "matchingColumns": [],
+                    "schema": [
+                        {
+                            "id": "search",
+                            "displayName": "search",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "location",
+                            "displayName": "location",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "state",
+                            "displayName": "state",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "country",
+                            "displayName": "country",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "string"
+                        },
+                        {
+                            "id": "limit",
+                            "displayName": "limit",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "canBeUsedToMatch": true,
+                            "type": "number"
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                }
+            },
+            "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+            "typeVersion": 2.1,
+            "position": [
+                400,
+                120
+            ],
+            "id": "2b81eeaa-7358-49a7-930b-631909208275",
+            "name": "X"
+        }
+    ],
+    "connections": {
+        "When chat message received": {
+            "main": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Simple Memory": {
+            "ai_memory": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_memory",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Instagram": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "xAI Grok Chat Model": {
+            "ai_languageModel": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_languageModel",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "TikTok": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "X": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "AI Agent",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": null,
+    "pinData": {},
+    "versionId": "04229f6f-958d-48fc-9697-17e8bd01e649",
+    "triggerCount": 0,
+    "tags": []
+}

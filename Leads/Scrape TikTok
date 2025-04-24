@@ -1,0 +1,354 @@
+{
+    "createdAt": "2025-04-23T06:27:20.063Z",
+    "updatedAt": "2025-04-24T07:37:37.000Z",
+    "id": "6uN6LDKJHPGLQo3m",
+    "name": "Scrape TikTok",
+    "active": false,
+    "nodes": [
+        {
+            "parameters": {
+                "inputSource": "jsonExample",
+                "jsonExample": "{\n  \"search\": \"landscaping\",\n  \"location\": \"New York\",\n  \"state\": \"NY\",\n  \"country\": \"us\",\n  \"limit\": 200\n}"
+            },
+            "id": "3455fdac-ca21-4d23-b1ed-9ab097a9665e",
+            "typeVersion": 1.1,
+            "name": "When Executed by Another Workflow",
+            "type": "n8n-nodes-base.executeWorkflowTrigger",
+            "position": [
+                -80,
+                360
+            ]
+        },
+        {
+            "parameters": {
+                "url": "=https://api.apify.com/v2/datasets/{{ $json.data.defaultDatasetId }}/items",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                560,
+                360
+            ],
+            "id": "5d3c9179-cf1f-436d-96ff-60bb6aafa25e",
+            "name": "HTTP Request2",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://api.apify.com/v2/acts/f1ZeP0K58iwlqG2pY/runs?waitForFinish=300",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n    \"hashtags\": [\n        \"{{ $json.search }}{{ $json.location }}\"\n    ],\n    \"resultsPerPage\": {{ $json.limit }},\n    \"shouldDownloadCovers\": false,\n    \"shouldDownloadSlideshowImages\": false,\n    \"shouldDownloadSubtitles\": false,\n    \"shouldDownloadVideos\": false\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                360,
+                360
+            ],
+            "id": "3858fa5a-fe54-4550-ad21-ed82637b6488",
+            "name": "HTTP Request",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "appendOrUpdate",
+                "documentId": {
+                    "__rl": true,
+                    "value": "1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY",
+                    "mode": "list",
+                    "cachedResultName": "Scraped Data",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit?usp=drivesdk"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": 813780713,
+                    "mode": "list",
+                    "cachedResultName": "TikTok",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit#gid=813780713"
+                },
+                "columns": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "id": "={{ $json.id }}",
+                        "text": "={{ $json.text }}",
+                        "name": "={{ $json.authorMeta.name }}",
+                        "profileUrl": "={{ $json.authorMeta.profileUrl }}",
+                        "nickName": "={{ $json.authorMeta.nickName }}",
+                        "signature": "={{ $json.authorMeta.signature }}",
+                        "following": "={{ $json.authorMeta.following }}",
+                        "friends": "={{ $json.authorMeta.friends }}",
+                        "address": "={{ $json.locationMeta.address }}",
+                        "webVideoUrl": "={{ $json.webVideoUrl }}"
+                    },
+                    "matchingColumns": [
+                        "id"
+                    ],
+                    "schema": [
+                        {
+                            "id": "id",
+                            "displayName": "id",
+                            "required": false,
+                            "defaultMatch": true,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "text",
+                            "displayName": "text",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "name",
+                            "displayName": "name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "profileUrl",
+                            "displayName": "profileUrl",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "nickName",
+                            "displayName": "nickName",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "signature",
+                            "displayName": "signature",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "following",
+                            "displayName": "following",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "friends",
+                            "displayName": "friends",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "address",
+                            "displayName": "address",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "webVideoUrl",
+                            "displayName": "webVideoUrl",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.5,
+            "position": [
+                780,
+                360
+            ],
+            "id": "8f5d20ee-82d3-4f3c-8163-4a04d9585196",
+            "name": "Google Sheets",
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "id": "seMEDuFYQQi6AWSe",
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "mode": "runOnceForEachItem",
+                "language": "python",
+                "pythonCode": "# Add a new field called 'myNewField' to the JSON of the item\n_input.item.json.search = str(_input.item.json.search).strip().lower().replace(' ', '')\n_input.item.json.location = str(_input.item.json.location).strip().lower().replace(' ', '')\n_input.item.json.limit = max(200, _input.item.json.limit)\nreturn _input.item"
+            },
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                140,
+                360
+            ],
+            "id": "eb4f1547-44bc-4236-b9a1-44d1232d1c3e",
+            "name": "Code"
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                1000,
+                360
+            ],
+            "id": "5adf8e6e-8565-482f-9878-3bd2241c0945",
+            "name": "Aggregate1"
+        }
+    ],
+    "connections": {
+        "When Executed by Another Workflow": {
+            "main": [
+                [
+                    {
+                        "node": "Code",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request2": {
+            "main": [
+                [
+                    {
+                        "node": "Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Sheets": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": {
+        "templateCredsSetupCompleted": true
+    },
+    "pinData": {
+        "When Executed by Another Workflow": [
+            {
+                "json": {
+                    "search": "landscaping",
+                    "location": "New York",
+                    "state": "NY",
+                    "country": "us",
+                    "limit": 200
+                }
+            }
+        ]
+    },
+    "versionId": "67fb98f4-74ea-4989-af43-1c796be02a37",
+    "triggerCount": 0,
+    "tags": []
+}

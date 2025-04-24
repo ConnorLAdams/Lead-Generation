@@ -1,0 +1,341 @@
+{
+    "createdAt": "2025-04-17T04:46:33.287Z",
+    "updatedAt": "2025-04-24T07:38:40.000Z",
+    "id": "nwFqFjca0DQXFY5N",
+    "name": "Scrape Linkedin",
+    "active": false,
+    "nodes": [
+        {
+            "parameters": {
+                "inputSource": "jsonExample",
+                "jsonExample": "{\n  \"search\": \"landscaping\",\n  \"location\": \"New York\",\n  \"state\": \"NY\",\n  \"country\": \"us\",\n  \"limit\": 50\n}"
+            },
+            "id": "2762390f-78d8-4e17-a545-cf1e5b3ff779",
+            "typeVersion": 1.1,
+            "name": "When Executed by Another Workflow",
+            "type": "n8n-nodes-base.executeWorkflowTrigger",
+            "position": [
+                -80,
+                360
+            ]
+        },
+        {
+            "parameters": {
+                "aggregate": "aggregateAllItemData",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.aggregate",
+            "typeVersion": 1,
+            "position": [
+                780,
+                360
+            ],
+            "id": "bbb0ac28-2be6-4ed1-9769-acba5af976b1",
+            "name": "Aggregate"
+        },
+        {
+            "parameters": {
+                "url": "=https://api.apify.com/v2/datasets/{{ $json.data.defaultDatasetId }}/items",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                340,
+                360
+            ],
+            "id": "f743d185-7cd4-411a-a51d-eb5a379807af",
+            "name": "HTTP Request2",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://api.apify.com/v2/acts/od6RadQV98FOARtrp/runs?waitForFinish=300",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n    \"language\": \"en\",\n    \"action\": \"get-companies\",\n    \"isName\": false,\n    \"isUrl\": false,\n    \"keyWords\": [\n      \"{{ $json.search }}\"\n    ],\n    \"location\": [\n      \"{{ $json.location }}\", \n      \"{{ $json.state }}\", \n      \"{{ $json.country }}\"\n    ],\n    \"limit\": {{ $json.limit }}\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                140,
+                360
+            ],
+            "id": "ccbfca34-d661-471c-b5fc-cdd6ac8849d9",
+            "name": "HTTP Request",
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "SnXFnDMjJNbazDLf",
+                    "name": "Apify"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "operation": "appendOrUpdate",
+                "documentId": {
+                    "__rl": true,
+                    "value": "1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY",
+                    "mode": "list",
+                    "cachedResultName": "Scraped Data",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit?usp=drivesdk"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": 1052182920,
+                    "mode": "list",
+                    "cachedResultName": "Linkedin",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uuz2P8Igbi5ycSfa0auLXMmhqD7j5Xkhd9-6XZ_kEBY/edit#gid=1052182920"
+                },
+                "columns": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "urn": "={{ $json.urn }}",
+                        "name": "={{ $json.name }}",
+                        "url": "={{ $json.url }}",
+                        "websiteUrl": "={{ $json.websiteUrl }}",
+                        "description": "={{ $json.description }}",
+                        "industry": "={{ $json.industry }}",
+                        "employeeCount": "={{ $json.employeeCount }}",
+                        "city": "={{ $json.headquarter.city }}",
+                        "country": "={{ $json.headquarter.country }}",
+                        "postalCode": "={{ $json.headquarter.postalCode }}"
+                    },
+                    "matchingColumns": [
+                        "urn"
+                    ],
+                    "schema": [
+                        {
+                            "id": "urn",
+                            "displayName": "urn",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "name",
+                            "displayName": "name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "url",
+                            "displayName": "url",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "description",
+                            "displayName": "description",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "websiteUrl",
+                            "displayName": "websiteUrl",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "industry",
+                            "displayName": "industry",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "employeeCount",
+                            "displayName": "employeeCount",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "city",
+                            "displayName": "city",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "country",
+                            "displayName": "country",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "postalCode",
+                            "displayName": "postalCode",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.5,
+            "position": [
+                560,
+                360
+            ],
+            "id": "8fad0170-42f9-48ea-8eba-c25fb3aa55d9",
+            "name": "Google Sheets",
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "id": "seMEDuFYQQi6AWSe",
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "content": "## Used with the chatbot\n- This will run when the chatbot wants to scrape linkedin"
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -80,
+                160
+            ],
+            "id": "4381e456-79b6-428e-a76b-f68e4f632053",
+            "name": "Sticky Note"
+        }
+    ],
+    "connections": {
+        "When Executed by Another Workflow": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request2": {
+            "main": [
+                [
+                    {
+                        "node": "Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "HTTP Request": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request2",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Sheets": {
+            "main": [
+                [
+                    {
+                        "node": "Aggregate",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": {
+        "templateCredsSetupCompleted": true
+    },
+    "pinData": {
+        "When Executed by Another Workflow": [
+            {
+                "json": {
+                    "search": "landscaping",
+                    "location": "New York",
+                    "state": "NY",
+                    "country": "us",
+                    "limit": 50
+                }
+            }
+        ]
+    },
+    "versionId": "84699418-a614-4f1b-adbf-c11592c53d8c",
+    "triggerCount": 0,
+    "tags": []
+}
