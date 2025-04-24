@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-17T06:07:24.068Z",
-    "updatedAt": "2025-04-24T07:44:19.000Z",
+    "updatedAt": "2025-04-24T09:29:57.000Z",
     "id": "uShniQJGXWveHg2l",
     "name": "Scrape Instagram",
     "active": false,
@@ -62,10 +62,6 @@
                         {
                             "name": "Content-Type",
                             "value": "application/json"
-                        },
-                        {
-                            "name": "Authorization",
-                            "value": "Bearer apify_api_zh15Lu4xYlcFfpl4e6bwYOrWGqhCmD1RXEAK"
                         }
                     ]
                 },
@@ -548,7 +544,7 @@
             }
         ]
     },
-    "versionId": "ec478b63-368a-4159-8e95-7fbb96af05bd",
+    "versionId": "05de6157-bcb5-4c7f-9abc-82f01ba65836",
     "triggerCount": 0,
     "tags": []
 }
