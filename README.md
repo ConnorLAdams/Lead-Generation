@@ -1,7 +1,7 @@
 # Overview
 ![n8n Project](./docs/videos/n8n_overview.gif)
 
-# Pre-Requisites
+# Prerequisites
 ## Accounts
 For this project you will need the following accounts:
 - n8n
