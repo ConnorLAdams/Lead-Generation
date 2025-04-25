@@ -44,3 +44,7 @@ API Key for each of the necessary accounts:
     8. [Scrape Twitter](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_Twitter.json)
 
 ![n8n Add Workflow](./docs/videos/n8n_add_workflow.gif)
+
+5. Setup your Google Sheet
+
+![n8n Google Sheet](./docs/videos/google_scraped_data_template_setup.gif)
