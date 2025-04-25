@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-17T04:46:33.287Z",
-    "updatedAt": "2025-04-24T07:38:40.000Z",
+    "updatedAt": "2025-04-25T03:24:52.000Z",
     "id": "nwFqFjca0DQXFY5N",
     "name": "Scrape Linkedin",
     "active": false,
@@ -251,21 +251,24 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
         },
         {
             "parameters": {
-                "content": "## Used with the chatbot\n- This will run when the chatbot wants to scrape linkedin"
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Scrape LinkedIn](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_Linkedin.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
             },
             "type": "n8n-nodes-base.stickyNote",
             "typeVersion": 1,
             "position": [
-                -80,
-                160
+                -100,
+                -40
             ],
-            "id": "4381e456-79b6-428e-a76b-f68e4f632053",
+            "id": "dfb53f81-85de-4270-bbdd-72c21a2fd59f",
             "name": "Sticky Note"
         }
     ],
@@ -335,7 +338,7 @@
             }
         ]
     },
-    "versionId": "84699418-a614-4f1b-adbf-c11592c53d8c",
+    "versionId": "bf0d3513-2504-4927-b547-0b5ad4f79c56",
     "triggerCount": 0,
     "tags": []
 }

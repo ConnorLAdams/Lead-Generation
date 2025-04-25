@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-23T07:06:14.485Z",
-    "updatedAt": "2025-04-24T07:37:07.000Z",
+    "updatedAt": "2025-04-25T03:25:49.000Z",
     "id": "CO2NfObzKydyv1Lo",
     "name": "Scrape Twitter",
     "active": false,
@@ -197,7 +197,7 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
         },
@@ -229,6 +229,22 @@
             ],
             "id": "0d688c55-b905-49ff-9b7c-69cef69b09f7",
             "name": "Aggregate1"
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Scrape Twitter](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_Twitter.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -100,
+                -40
+            ],
+            "id": "6e5c59e3-f23a-4fb1-bb4a-c39c547e378e",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -308,7 +324,7 @@
             }
         ]
     },
-    "versionId": "bf855c3c-eccb-4030-92d3-6abd236f51ed",
+    "versionId": "842cf130-5fd3-4eea-9feb-8ba56761886e",
     "triggerCount": 0,
     "tags": []
 }

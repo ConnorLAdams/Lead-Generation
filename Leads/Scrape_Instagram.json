@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-17T06:07:24.068Z",
-    "updatedAt": "2025-04-24T09:29:57.000Z",
+    "updatedAt": "2025-04-25T03:25:02.000Z",
     "id": "uShniQJGXWveHg2l",
     "name": "Scrape Instagram",
     "active": false,
@@ -215,7 +215,7 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
         },
@@ -423,9 +423,25 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Scrape Instagram](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_Instagram.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -100,
+                40
+            ],
+            "id": "73c31da1-41d9-47db-89e0-c5d0fd132d15",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -544,7 +560,7 @@
             }
         ]
     },
-    "versionId": "05de6157-bcb5-4c7f-9abc-82f01ba65836",
+    "versionId": "0edc5326-0d62-4580-b636-d909f94c6702",
     "triggerCount": 0,
     "tags": []
 }

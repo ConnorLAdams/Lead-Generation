@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-22T05:17:09.887Z",
-    "updatedAt": "2025-04-24T01:19:08.000Z",
+    "updatedAt": "2025-04-25T03:25:32.000Z",
     "id": "rEGLe3N5BHMWRs90",
     "name": "Get Social Media Leads",
     "active": false,
@@ -152,7 +152,7 @@
             "credentials": {
                 "xAiApi": {
                     "id": "I5LW0rhixggU6PDg",
-                    "name": "xAi account"
+                    "name": "xAi"
                 }
             }
         },
@@ -177,7 +177,7 @@
             "credentials": {
                 "openAiApi": {
                     "id": "VQkxJojR7CzPADuj",
-                    "name": "OpenAi account"
+                    "name": "OpenAi"
                 }
             }
         },
@@ -340,6 +340,22 @@
             ],
             "id": "2b81eeaa-7358-49a7-930b-631909208275",
             "name": "X"
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Get Social Media Leads](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Get_Social_Media_Leads.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -580,
+                -500
+            ],
+            "id": "25e034c9-aa49-4860-854e-5b80e8b0c20a",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -416,7 +432,7 @@
     "staticData": null,
     "meta": null,
     "pinData": {},
-    "versionId": "04229f6f-958d-48fc-9697-17e8bd01e649",
+    "versionId": "c3034134-31eb-4068-b246-e26a164326f4",
     "triggerCount": 0,
     "tags": []
 }

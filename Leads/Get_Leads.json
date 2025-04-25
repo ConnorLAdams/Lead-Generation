@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-17T05:10:40.306Z",
-    "updatedAt": "2025-04-24T04:22:32.000Z",
+    "updatedAt": "2025-04-25T03:25:41.000Z",
     "id": "8QjnnJwx4MQXLwa9",
     "name": "Get Leads",
     "active": false,
@@ -55,7 +55,7 @@
             "credentials": {
                 "openAiApi": {
                     "id": "VQkxJojR7CzPADuj",
-                    "name": "OpenAi account"
+                    "name": "OpenAi"
                 }
             }
         },
@@ -317,9 +317,25 @@
             "credentials": {
                 "xAiApi": {
                     "id": "I5LW0rhixggU6PDg",
-                    "name": "xAi account"
+                    "name": "xAi"
                 }
             }
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Get Leads](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Get_Leads.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -220,
+                -320
+            ],
+            "id": "5d885779-bf2b-4bdd-92ec-4e2743d4593e",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -403,7 +419,7 @@
         "templateCredsSetupCompleted": true
     },
     "pinData": {},
-    "versionId": "b0411e94-c015-44d7-a389-64eb199dbb27",
+    "versionId": "de6ce1b1-f772-4863-b0bf-7adabae9b863",
     "triggerCount": 2,
     "tags": []
 }

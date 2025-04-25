@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-18T23:13:24.630Z",
-    "updatedAt": "2025-04-24T08:01:48.000Z",
+    "updatedAt": "2025-04-25T03:25:13.000Z",
     "id": "VFCR6BxExceGOWXK",
     "name": "Scrape Apollo",
     "active": false,
@@ -303,7 +303,7 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
         },
@@ -335,6 +335,22 @@
             ],
             "id": "b1f45c0a-b526-46d2-ad4c-e27d2bd278be",
             "name": "Aggregate1"
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Scrape Apollo](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_Apollo.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -80,
+                0
+            ],
+            "id": "90754bcd-5ac7-48f9-9819-067cfcc7bba7",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -414,7 +430,7 @@
             }
         ]
     },
-    "versionId": "53c59d6f-7d6f-4b34-81f5-b477991a6457",
+    "versionId": "99f92553-eedb-4b2b-88c7-3cbe84891378",
     "triggerCount": 0,
     "tags": []
 }

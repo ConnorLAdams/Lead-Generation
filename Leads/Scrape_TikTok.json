@@ -1,6 +1,6 @@
 {
     "createdAt": "2025-04-23T06:27:20.063Z",
-    "updatedAt": "2025-04-24T07:37:37.000Z",
+    "updatedAt": "2025-04-25T03:25:59.000Z",
     "id": "6uN6LDKJHPGLQo3m",
     "name": "Scrape TikTok",
     "active": false,
@@ -237,7 +237,7 @@
             "credentials": {
                 "googleSheetsOAuth2Api": {
                     "id": "seMEDuFYQQi6AWSe",
-                    "name": "Google Sheets account"
+                    "name": "Google Sheets"
                 }
             }
         },
@@ -269,6 +269,22 @@
             ],
             "id": "5adf8e6e-8565-482f-9878-3bd2241c0945",
             "name": "Aggregate1"
+        },
+        {
+            "parameters": {
+                "content": "## Grab the Latest Updates\n1. Copy the following link\n    - [Scrape TikTok](https://raw.githubusercontent.com/ConnorLAdams/Lead-Generation/refs/tags/latest/Leads/Scrape_TikTok.json)\n2. Click the 3 dots in the upper right corner\n3. Click \"Import from URL...\"\n4. Paste link\n\n### Click [here](https://github.com/ConnorLAdams/Lead-Generation/tree/latest) for a more in-depth guide",
+                "height": 220,
+                "width": 780,
+                "color": 5
+            },
+            "type": "n8n-nodes-base.stickyNote",
+            "typeVersion": 1,
+            "position": [
+                -100,
+                -40
+            ],
+            "id": "d362b5fb-211a-427d-b505-3c038aaf468a",
+            "name": "Sticky Note"
         }
     ],
     "connections": {
@@ -348,7 +364,7 @@
             }
         ]
     },
-    "versionId": "67fb98f4-74ea-4989-af43-1c796be02a37",
+    "versionId": "b3311bb2-c335-4b97-998e-e05ae8d4a04a",
     "triggerCount": 0,
     "tags": []
 }
